@@ -1,0 +1,17 @@
+<!-- app/views/todos/index.html.erb -->
+<%= form_with model: Todo.new, local: true do |form| %>
+  <%= form.text_field :title %>
+  <%= form.submit '+' %>
+<% end %>
+
+<ul>
+  <% @todos.each do |todo| %>
+    <li>
+      <%= form_with model: todo, local: true do |form| %>
+        <%= form.check_box :completed %>
+        <%= form.label :title, todo.title %>
+        <%= form.submit 'Update' %>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
