@@ -1,0 +1,4 @@
+// app/views/todos/update.js.erb
+var todoElement = document.getElementById('todo_<%= @todo.id %>');
+var checkbox = todoElement.querySelector('input[type="checkbox"]');
+checkbox.checked = <%= @todo.completed ? 'true' : 'false' %>;

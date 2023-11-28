@@ -5,12 +5,12 @@
 <% end %>
 
 <ul>
+  <!-- app/views/todos/index.html.erb -->
   <% @todos.each do |todo| %>
-    <li>
-      <%= form_with model: todo, local: true do |form| %>
-        <%= form.check_box :completed %>
+    <li id="todo_<%= todo.id %>">
+      <%= form_with model: todo, local: true, remote: true do |form| %>
+        <%= form.check_box :completed, onchange: 'this.form.submit()' %>
         <%= form.label :title, todo.title %>
-        <%= form.submit 'Update' %>
       <% end %>
     </li>
   <% end %>

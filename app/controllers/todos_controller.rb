@@ -18,7 +18,10 @@ class TodosController < ApplicationController
   def update
     @todo = current_user.todos.find(params[:id])
     if @todo.update(todo_params)
-      redirect_to root_path
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
     else
       render :index
     end
