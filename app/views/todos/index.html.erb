@@ -1,17 +1,18 @@
 <!-- app/views/todos/index.html.erb -->
-<%= form_with model: Todo.new, local: true do |form| %>
-  <%= form.text_field :title %>
-  <%= form.submit '+' %>
-<% end %>
-
-<ul>
-  <!-- app/views/todos/index.html.erb -->
-  <% @todos.each do |todo| %>
-    <li id="todo_<%= todo.id %>">
-      <%= form_with model: todo, local: true, remote: true do |form| %>
-        <%= form.check_box :completed, onchange: 'this.form.submit()' %>
-        <%= form.label :title, todo.title %>
-      <% end %>
-    </li>
+<div class="todo-container">
+  <%= form_with model: Todo.new, local: true, class: "todo-form" do |form| %>
+    <%= form.text_field :title, placeholder: "todo title...", class: "todo-input", autocomplete: 'off' %>
+    <%= form.submit '+', class: "todo-add-btn" %>
   <% end %>
-</ul>
+
+  <ul class="todo-list">
+    <% @todos.each do |todo| %>
+      <li class="todo-item <%= 'is-completed' if todo.completed %>" id="todo_<%= todo.id %>">
+        <%= form_with model: todo, local: true, class: "todo-item-form" do |form| %>
+          <%= form.check_box :completed, onchange: 'this.form.submit()', class: "todo-checkbox" %>
+          <%= form.label :title, todo.title, class: "todo-label" %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
